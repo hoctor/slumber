@@ -20,13 +20,13 @@ import android.widget.TextView;
 
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements SensorEventListener,View.OnClickListener {
 
     private TextView xText, yText, zText;
     private Sensor sensor;
     private SensorManager sManager;
     private Button startB,stopB;
-
+    private boolean mInitialized;
     DecimalFormat dx = new DecimalFormat("#.##");
     DecimalFormat dy = new DecimalFormat("#.##");
     DecimalFormat dz = new DecimalFormat("#.##");
@@ -43,27 +43,29 @@ public class MainActivity extends Activity {
         // Accelerometer sensor
         sensor = sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         //Register sensor Listener
-
+        sManager.registerListener(this, sensor,SensorManager.SENSOR_DELAY_NORMAL);
         // assign Textview
         xText = (TextView)findViewById(R.id.xText);
         yText = (TextView)findViewById(R.id.yText);
         zText = (TextView)findViewById(R.id.zText);
-        sManager.registerListener((SensorEventListener) this, sensor,SensorManager.SENSOR_DELAY_NORMAL);
+        Button startButton = (Button) findViewById(R.id.startB);
+        Button stopButton = (Button) findViewById(R.id.stopB);
+        startButton.setOnClickListener(this);
+        stopButton.setOnClickListener(this);
+        mInitialized = false;
     }
 
     public void onResume() {
         super.onResume();
-
-
-                sManager.registerListener((SensorEventListener) this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+                sManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
 
     }
     protected void onPause() {
         super.onPause();
-
+        sManager.unregisterListener(this);
     }
 
-    SensorEventListener accelListener = new SensorEventListener() {
+
         public void onAccuracyChanged(Sensor sensor, int acc) { }
 
 
@@ -76,6 +78,15 @@ public class MainActivity extends Activity {
             yText.setText("Y : " + dy.format(y));
             zText.setText("Z : " + dz.format(z));
         }
-    };
 
+        public void onClick (View v){
+            switch (v.getId()) {
+                case R.id.startB:
+                    sManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+                    break;
+                case R.id.stopB:
+                    sManager.unregisterListener(this);
+                    break;
+            }
+    }
 }
