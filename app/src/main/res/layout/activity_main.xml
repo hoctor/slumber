@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/Xtext"
     android:layout_width="match_parent"
@@ -12,52 +12,32 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/xText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="X"
-        android:id="@+id/xText"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Y"
-        android:id="@+id/yText"
-        android:layout_below="@+id/xText"
-        android:layout_alignStart="@+id/xText"
-        android:layout_marginTop="30dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Z"
-        android:id="@+id/zText"
-        android:layout_below="@+id/yText"
-        android:layout_alignEnd="@+id/yText"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="50dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/startB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Let's Rock"
-        android:layout_marginTop="116dp"
-        android:layout_below="@+id/zText"
-        android:layout_toLeftOf="@+id/yText"
-        android:layout_toStartOf="@+id/yText" />
+        android:layout_below="@+id/xText"
+        android:layout_marginLeft="0dp"
+        android:layout_toLeftOf="@+id/xText"
+        android:layout_toStartOf="@+id/xText"
+        android:text="Let's Rock" />
 
     <Button
         android:id="@+id/stopB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop"
         android:layout_alignBaseline="@+id/startB"
         android:layout_alignBottom="@+id/startB"
+        android:layout_toEndOf="@+id/xText"
         android:layout_toRightOf="@+id/xText"
-        android:layout_toEndOf="@+id/xText" />
-</RelativeLayout>
+        android:text="Stop" />
+</LinearLayout>
